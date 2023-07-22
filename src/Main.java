@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,8 +11,9 @@ public class Main {
         System.out.println("Please enter the file address");
         String file = scanner.nextLine();
 
-        System.out.println("Please enter key (any number)");
-        int key = scanner.nextInt();
+        // System.out.println("Enter the path to the file where to write encrypted / encrypted text");
+       // String file2 = scanner.nextLine();
+        // Потрібно уточнити
 
         ArrayList<Character> textChar = new ArrayList<>();
 
@@ -34,31 +32,57 @@ public class Main {
             System.out.println("Something went wrong. Try again " + e);
         }
 
+        System.out.println("Please enter key (any number)");
+        int key = scanner.nextInt();
+
         // Зроблено зчитування ключа( цифри ) і тексту з файлу і перетворення файлу
 
-        encryption(textChar, key);
-        decryption(textChar, key);
+        System.out.println("Please choose a method and press the number: \n ...1 - encryption... \n ...2 - decryption...");
+        int n = scanner.nextInt();
+        if (n == 1) {
+            encryption(textChar, key);
+        } else if (n == 2) {
+            decryption(textChar, key);
+        }
+
     }
 
-    private static void encryption(ArrayList textList, int key) throws Exception {
+    private static void encryption(ArrayList textChar, int key) {
+
         UkrainianAlphabet.ukrainianAlphabet();
 
+        //  У "fileName" має бути записана змінна "file2"
 
-        ArrayList<Character> characterArrayList = new ArrayList<>();
-        for (int j = 0; j < textList.size(); j++) {
-            for (int i = 0; i < UkrainianAlphabet.alphabet.size(); i++) {
-                if (textList.get(j).equals(UkrainianAlphabet.alphabet.get(i))) {
-                    characterArrayList.add((char) UkrainianAlphabet.alphabet.get((i + key) % 41));
-                } else
-                    continue;
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Admin\\javarush\\text2.txt"))) {
+
+            for (int j = 0; j < textChar.size(); j++) {
+                for (int i = 0; i < UkrainianAlphabet.alphabet.size(); i++) {
+                    if (textChar.get(j).equals(UkrainianAlphabet.alphabet.get(i))) {
+                        bufferedWriter.append((char) UkrainianAlphabet.alphabet.get((i + key) % 41));
+                    }
+                }
             }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
-        System.out.println(characterArrayList.toString());
-
     }
 
-    private static void decryption(ArrayList arrayList, int key) {
+    private static void decryption(ArrayList textChar, int key) {
 
+        UkrainianAlphabet.ukrainianAlphabet();
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Admin\\javarush\\text2.txt"))) {
+
+            for (int j = 0; j < textChar.size(); j++) {
+                for (int i = 0; i < UkrainianAlphabet.alphabet.size(); i++) {
+                    if (textChar.get(j).equals(UkrainianAlphabet.alphabet.get(i))) {
+                        bufferedWriter.append((char) UkrainianAlphabet.alphabet.get((i + key) % 41));
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 // Шифрування / розшифрування
 }
