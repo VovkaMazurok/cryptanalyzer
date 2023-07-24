@@ -7,7 +7,7 @@ public final class UkrainianAlphabet {
 
 
         //String abc = "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩьЮЯ.,”:-!? ";
-        String abc = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя.,”:-!? ";
+        String abc = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя.,”):’-!(? ";
         char[] abcArray = abc.toCharArray();
 
 
