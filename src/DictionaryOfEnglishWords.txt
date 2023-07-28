@@ -70,7 +70,13 @@ bank
 bar
 base
 basic
-be (am, been, were, are, was, is)
+be
+am
+been
+were
+are
+was
+is
 bear
 beautiful
 because
@@ -145,7 +151,8 @@ catch
 caught
 cause
 central
-centre / center
+centre
+center
 century
 certain
 certainly

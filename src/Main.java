@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         LocalTime time = LocalTime.now();
-        String timeNow = String.valueOf(time.getSecond());
+        String timeNow = String.valueOf(time.getNano());
 
         Scanner scanner = new Scanner(System.in);
 
@@ -26,7 +26,6 @@ public class Main {
                 char ch = (char) Character.toLowerCase(bufferedReader.read());
                 textChar.add(ch);
             }
-            System.out.println(textChar);
 
         } catch (FileNotFoundException e) {
             System.out.println("The file does not exist or is not available. Try another one " + e);
@@ -40,7 +39,7 @@ public class Main {
         int method = scanner.nextInt();
 
         if (method == 1) {
-            System.out.println("Please choose a method and press the number: \n ...1 - encryption... \n ...2 - decryption...");
+            System.out.println("Please choose a method and press the number:\n...1 - encryption...\n...2 - decryption...");
             int encOrDec = scanner.nextInt();
 
             if (encOrDec == 1) {
@@ -56,16 +55,6 @@ public class Main {
             BruteForceMethod.bruteForceDecrypt(textChar, timeNow);
         }
     }
-
-
-
-
-
-
-
-
-
-
 }
 
 

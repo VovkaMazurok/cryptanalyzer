@@ -2,9 +2,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class CaesarsCipher {
-    public static void encryption(ArrayList<Character> textChar, int key, String  timeNow) {
+    public static void encryption(ArrayList<Character> textChar, int key, String timeNow) {
 
-        UkrainianAlphabet.ukrainianAlphabet();
+        EnglishAlphabet.englishAlphabet();
+
 
         String way = "C:\\Users\\Admin\\javarush";
         String fileName = timeNow + "readme1.txt";
@@ -14,22 +15,29 @@ public class CaesarsCipher {
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);) {
 
             for (int j = 0; j < textChar.size(); j++) {
-                for (int i = 0; i < UkrainianAlphabet.alphabet.size(); i++) {
-                    if (textChar.get(j).equals(UkrainianAlphabet.alphabet.get(i))) {
-                        bufferedWriter.append((char) UkrainianAlphabet.alphabet.get((i + key) % 38));
+                for (int i = 0; i < EnglishAlphabet.alphabet.size(); i++) {
+                    if (textChar.get(j).equals(EnglishAlphabet.alphabet.get(i))) {
+                        if (key > 0) {
+                            bufferedWriter.append((char) EnglishAlphabet.alphabet.get((i + key) % 37));
+                        } else if(key < 0) {
+                             bufferedWriter.append((char) EnglishAlphabet.alphabet.get((37 + (i + key) % 37) % 37));
+                        }
                     }
                 }
             }
             bufferedWriter.close();
             fileWriter.close();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+
         }
+
     }
 
     static void decryption(ArrayList<Character> textChar, int key, String timeNow) {
 
-        UkrainianAlphabet.ukrainianAlphabet();
+        EnglishAlphabet.englishAlphabet();
 
         String way = "C:\\Users\\Admin\\javarush";
         String fileName = timeNow + "readme1.txt";
@@ -39,9 +47,14 @@ public class CaesarsCipher {
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);) {
 
             for (int j = 0; j < textChar.size(); j++) {
-                for (int i = 0; i < UkrainianAlphabet.alphabet.size(); i++) {
-                    if (textChar.get(j).equals(UkrainianAlphabet.alphabet.get(i))) {
-                        bufferedWriter.append((char) UkrainianAlphabet.alphabet.get((38 + (i - key) % 38) % 38));
+                for (int i = 0; i < EnglishAlphabet.alphabet.size(); i++) {
+
+                    if (textChar.get(j).equals(EnglishAlphabet.alphabet.get(i))) {
+                        if(key > 0) {
+                            bufferedWriter.append((char) EnglishAlphabet.alphabet.get((37 + (i - key) % 37) % 37));
+                        } else if (key < 0) {
+                            bufferedWriter.append((char) EnglishAlphabet.alphabet.get((i - key) % 37));
+                        }
                     }
                 }
             }

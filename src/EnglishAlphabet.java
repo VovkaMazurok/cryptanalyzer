@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public final class UkrainianAlphabet {
+public class EnglishAlphabet {
     public static ArrayList<Character> alphabet = new ArrayList<>();
 
-    public static final void ukrainianAlphabet() {
+    public static void englishAlphabet() {
 
 
         String abc = "abcdefghijklmnopqrstuvwxyz.,”):’-!(? ";
