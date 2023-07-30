@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class EnglishAlphabet {
+public final class EnglishAlphabet {
     public static ArrayList<Character> alphabet = new ArrayList<>();
 
     public static void englishAlphabet() {

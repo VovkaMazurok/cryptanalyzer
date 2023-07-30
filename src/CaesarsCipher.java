@@ -1,15 +1,12 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class CaesarsCipher {
-    public static void encryption(ArrayList<Character> textChar, int key, String timeNow) {
+public final class CaesarsCipher {
+    public static void encryption(ArrayList<Character> textChar, int key) {
 
         EnglishAlphabet.englishAlphabet();
 
-
-        String way = "C:\\Users\\Admin\\javarush";
-        String fileName = timeNow + "readme1.txt";
-        File file = new File(way, fileName);
+        File file = new File(Main.way, Main.fileName);
 
         try (FileWriter fileWriter = new FileWriter(file);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);) {
@@ -30,18 +27,14 @@ public class CaesarsCipher {
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
-
         }
-
     }
 
-    static void decryption(ArrayList<Character> textChar, int key, String timeNow) {
+    static void decryption(ArrayList<Character> textChar, int key) {
 
         EnglishAlphabet.englishAlphabet();
 
-        String way = "C:\\Users\\Admin\\javarush";
-        String fileName = timeNow + "readme1.txt";
-        File file = new File(way, fileName);
+        File file = new File(Main.way, Main.fileName);
 
         try (FileWriter fileWriter = new FileWriter(file);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);) {

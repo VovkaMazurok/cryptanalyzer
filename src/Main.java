@@ -5,15 +5,13 @@ import java.util.Scanner;
 
 //"C:\Users\Admin\javarush\text.txt"  це мій файл яким я перевіряю програму
 public class Main {
+    public static String way = "D:\\";
+    public static String fileName = String.valueOf(LocalTime.now().getNano()) + "readme.txt";
     public static void main(String[] args) {
-
-        LocalTime time = LocalTime.now();
-        String timeNow = String.valueOf(time.getNano());
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Hello user!) The program works with English words, letters and punctuation marks");
-
         System.out.println("Please enter the file address");
         String file = scanner.nextLine();
 
@@ -45,14 +43,14 @@ public class Main {
             if (encOrDec == 1) {
                 System.out.println("Enter the cryptographic key to encrypt the tex");
                 int keyEncrypt = scanner.nextInt();
-                CaesarsCipher.encryption(textChar, keyEncrypt, timeNow);
+                CaesarsCipher.encryption(textChar, keyEncrypt);
             } else if (encOrDec == 2) {
                 System.out.println("Enter the cryptographic key to decrypt the text");
                 int keyDec = scanner.nextInt();
-                CaesarsCipher.decryption(textChar, keyDec, timeNow);
+                CaesarsCipher.decryption(textChar, keyDec);
             }
         } else if (method == 2) {
-            BruteForceMethod.bruteForceDecrypt(textChar, timeNow);
+            BruteForceMethod.bruteForceDecrypt(textChar);
         }
     }
 }

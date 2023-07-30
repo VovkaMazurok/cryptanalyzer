@@ -3,64 +3,56 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
-public class BruteForceMethod {
-    public static void bruteForceDecrypt(ArrayList<Character> textChar, String timeNow) {
-DictionaryOfWords.dictionaryOfWords();
-        int keyRange = 26;
-        int key;
-        String str = "";
+public final class BruteForceMethod {
 
-        String way = "C:\\Users\\Admin\\javarush";
-        String fileName = timeNow + "readme1.txt";
-        File file = new File(way, fileName);
+    public static void bruteForceDecrypt(ArrayList<Character> textChar) {
+
+        EnglishAlphabet.englishAlphabet();
+        DictionaryOfWords.dictionaryOfWords();
+
+        File file = new File(Main.way, Main.fileName);
 
         try (FileWriter fileWriter = new FileWriter(file);
-             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);) {
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
 
-            for (key = 1; key <= keyRange; key++) {
+            for (int key = 1; key <= EnglishAlphabet.alphabet.size(); key++) {
+
+                ArrayList<String> stringArrayList = new ArrayList<>();
+                String world = "";
+
                 for (int i = 0; i < textChar.size(); i++) {
-                    char ch = (char) textChar.get(i);
-                    if (Character.isLetter(ch)) {
-                        char base = Character.isUpperCase(ch) ? 'A' : 'a';
-                        str = str + (char) (((ch - base - key + 26) % 26) + base);
+                    char encryptedChar = textChar.get(i);
+                    int encryptedCharIndex = EnglishAlphabet.alphabet.indexOf(encryptedChar);
+                    int decryptedCharIndex = (encryptedCharIndex - key + EnglishAlphabet.alphabet.size()) % EnglishAlphabet.alphabet.size();
+                    if (Character.isLetter(EnglishAlphabet.alphabet.get(decryptedCharIndex))) {
+                        world = world + (EnglishAlphabet.alphabet.get(decryptedCharIndex));
+                    } else {
+                        stringArrayList.add(world);
+                        world = "";
                     }
+                }
 
+                int wordsInDictionary = 0;
+                int maxWordsInDictionary = 0;
 
+                for (int j = 0; j < stringArrayList.size(); j++) {
+                    if (DictionaryOfWords.dictionary.contains(stringArrayList.get(j))) {
+                        wordsInDictionary++;
+                    }
+                }
+
+                if ((wordsInDictionary / (double) stringArrayList.size()) * 100 > 30 && wordsInDictionary > maxWordsInDictionary) {
+
+                    String str = "Hacked successfully! Key: " + key + "\nDecoded text: " + stringArrayList;
+                    bufferedWriter.append(str);
                 }
             }
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        System.out.println( str);
-
-//        String(char[] value)  конструктор для перетворення масиву символів у рядок.
-       // char ch = (char) Character.toLowerCase(bufferedReader.read());
-
-
-        if (checkDecryptedText(str, DictionaryOfWords.dictionary)) {
-            System.out.println("Успішно зламано! Ключ: " + key);
-            System.out.println("Розшифрований текст:");
-            System.out.println(textChar);
-        }
-    }
-
-    public static boolean checkDecryptedText(String str, HashSet<String> dictionary) {
-
-        // Розбиваємо розшифрований текст на слова
-        String[] words = str.split("\\s+");
-
-        // Перевіряємо кожне слово на наявність у словнику
-        for (String word : words) {
-            if (!dictionary.contains(word.toLowerCase())) {
-                return false;
-            }
-        }
-        return true;
-
     }
 }
+
+
+
