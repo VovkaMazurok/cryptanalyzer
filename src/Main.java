@@ -13,7 +13,10 @@ public class Main {
 
         System.out.println("Hello user!) The program works with English words, letters and punctuation marks");
         System.out.println("Please enter the file address");
-        String file = scanner.nextLine();
+        String file = "";
+        if(scanner.hasNextLine()) {
+             file = scanner.nextLine();
+        }
 
         ArrayList<Character> textChar = new ArrayList<>();
 
@@ -34,11 +37,18 @@ public class Main {
         System.out.println("Please select the method you want to use and press the corresponding number: \n" +
                 "...1 - Caesar's Cipher...\n" +
                 "...2 - Brute force method...");
-        int method = scanner.nextInt();
+        int method = 0;
+        if(scanner.hasNextInt()){
+            method = scanner.nextInt();
+        }
 
         if (method == 1) {
             System.out.println("Please choose a method and press the number:\n...1 - encryption...\n...2 - decryption...");
-            int encOrDec = scanner.nextInt();
+
+            int encOrDec = 0;
+            if(scanner.hasNextInt()){
+                encOrDec = scanner.nextInt();
+            }
 
             if (encOrDec == 1) {
                 System.out.println("Enter the cryptographic key to encrypt the tex");
